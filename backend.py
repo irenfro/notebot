@@ -24,7 +24,7 @@ def main():
             print("Invalid command, type help for a list of commands")
 
 def Help():
-    print("Commands:\n\tnew note <note name>: Makes a new note with the name. ex new note blank\n\tappend <note name>; <text>: appends the text to the note with \"<note name>\" ex append blank\n\tdisplay <note name>: displays the content in the note. ex display blank\n\tdelete <line number> <note name>: deletes the line number from the note then calls display. ex delete 1 blank\n\tclear <note name>: clears the contents of the note. ex clear blank\n\tlist: lists all note names")
+	return "Commands:\n\tnew note name: Makes a new note as name ie new note blank\n\tappend name; text: Appends text to note w/\"name\" ex append blank\n\tdisplay name: Disp the cont in note\n\tdelete line name: Del line from note then calls disp. ex delete 1 blank\n\tclear name: Clears the cont of note\n\tlist: Lists all notes"
 
 def newNote(command):
     name = command.split() 
@@ -55,6 +55,8 @@ def display(command):
         res += str(i)+". "+ line
         i += 1
     f.close()
+    if (len(res) == 0):
+	res = tokens[1] + " is empty"
     return res
 
 def delete(command):
@@ -97,6 +99,7 @@ def printNotes(command):
     for f in files:
         temp = f.split('.')
         res += str(i) + ". " + temp[0] + "\n"
+	i += 1
     return res
 
 if __name__ == '__main__':

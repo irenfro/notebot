@@ -13,7 +13,7 @@ if sys.executable != INTERP:
 sys.path.append(os.getcwd())
 
 import requests
-from backend import Help, newNote, printNotes, append, delete, clear
+from backend import Help, newNote, printNotes, append, delete, clear, display
 from flask import Flask, request
 import flask
 import traceback
@@ -72,7 +72,7 @@ def webhook():
 						else:
 							#The message content
 							#text = "Simon says: "+message_event["message"]["text"]
-							text = back(["message"]["text"])
+							text = back(str(message_event["message"]["text"]))
 						#Check and make sure that we have good data
 						if not check_data(sender, recip, text):
 							continue
@@ -102,22 +102,22 @@ def webhook():
 
 def back(command):
         command = command.lower()
-        if (command == "help") :
-            return Help()
+	if (command == "help"):
+            	return Help()
         elif ("new note" in command and len(command.split()) == 3):
-            return newNote(command)
+            	return newNote(command)
         elif ("list" in command):
-            return printNotes(command)
+            	return printNotes(command)
         elif ("append" in command):
-            return append(command)
+            	return append(command)
         elif ("display" in command):
-            return display(command)
+            	return display(command)
         elif ("delete" in command):
-            return delete(command)
+           	return delete(command)
         elif ("clear" in command):
-            return clear(command)
+            	return clear(command)
         else:
-            return "Invalid command, type help for a list of commands"
+            	return "Invalid command, type help for a list of commands"
 
 def send_message(rid, message_text):
 	#Page Access Token
